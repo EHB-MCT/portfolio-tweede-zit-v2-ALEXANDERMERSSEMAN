@@ -9,12 +9,6 @@ Dit is een API ontwikkeld voor een gesloten forum waar EhB-studenten vragen kunn
   - **models/**: Definieert de datamodellen die de structuur van de gegevens in de database specificeren.
   - **routes/**: Behandelt de API-routes en koppelt ze aan de juiste controllers.
   - **services/**: Bevat de services en businesslogica die door de controllers worden aangeroepen.
-  
-- **public/**: Bevat statische bestanden zoals CSS, JavaScript en HTML.
-  - **css/**: Stijlbladen voor de webpagina's.
-  - **js/**: JavaScript-bestanden voor client-side logica.
-  - **index.html**: De startpagina van de applicatie.
-  - **chat.html**: De pagina voor chatfunctionaliteit.
 
 - **tests/**: Bevat de tests voor de applicatie.
   - **unit/**: Unit tests voor afzonderlijke functies en modules.
@@ -24,11 +18,9 @@ Dit is een API ontwikkeld voor een gesloten forum waar EhB-studenten vragen kunn
 - **.github/**: Bevat GitHub workflows en CI/CD-configuraties.
   - **workflows/**: Automatische workflows voor continue integratie en levering (CI/CD).
 
-- **docker/**: Bevat Docker-gerelateerde bestanden.
+- **Docker-bestanden**: Bevat Docker-gerelateerde bestanden in de hoofdmap.
   - **Dockerfile**: Het Docker-bestand voor het bouwen van de applicatiecontainer.
-  - **docker-compose.develop.yml**: Docker Compose-configuratie voor de ontwikkelomgeving.
-  - **docker-compose.production.yml**: Docker Compose-configuratie voor de productieomgeving.
-  - **docker-compose.test.yml**: Docker Compose-configuratie voor de testomgeving.
+  - **docker-compose.yml**: Docker Compose-configuratie voor het starten en beheren van de container(s).
 
 - **.env**: Bevat omgevingsvariabelen voor de applicatie. Dit bestand bevat gevoelige gegevens zoals databaseverbindingen en API-sleutels. Zorg ervoor dat dit bestand niet wordt opgenomen in versiebeheer.
 
@@ -55,5 +47,5 @@ Volg de onderstaande stappen om het project op je lokale machine te installeren 
 1. **Clone de repository:**
 
    ```bash
-   git clone https://github.com/gebruikersnaam/repository.git
+   git clone https://github.com/EHB-MCT/portfolio-tweede-zit-v2-ALEXANDERMERSSEMAN.git
    cd repository
