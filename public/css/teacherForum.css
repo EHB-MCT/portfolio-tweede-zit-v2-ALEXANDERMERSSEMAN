@@ -1,0 +1,64 @@
+/* Algemene opmaak */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;  /* Lichtgrijze achtergrond */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+/* Forum container */
+.forum-container {
+    width: 80%;
+    max-width: 900px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel van het forum */
+h1 {
+    text-align: center;
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Berichtweergave */
+#message {
+    margin-top: 15px;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Vragen styling */
+#questionsContainer {
+    margin-top: 20px;
+}
+
+#questionsList {
+    margin: 0;
+    padding: 0;
+}
+
+.question-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.question-item p {
+    margin: 5px 0;
+}
+
+.question-item hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}

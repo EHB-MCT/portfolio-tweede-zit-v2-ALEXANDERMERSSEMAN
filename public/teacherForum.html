@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher forum</title>
-    <!-- Koppelen van de favicon -->
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <title>Teacher Forum</title>
+    <link rel="stylesheet" href="./css/teacherForum.css">
+    <link rel="icon" href="./images/favicon.ico" sizes="16x16" type="image/png">
 </head>
 <body>
-    <h1>Welcome to the Teacher Forum</h1>
-    <p>Here you can answer questions.</p>
+    <div class="forum-container">
+        <h1>EHB Teacher Forum</h1>
+        <div id="questionsContainer"> <!-- Container for displaying questions -->
+            <h2>Questions:</h2>
+            <div id="questionsList"></div>
+        </div>
+    </div>
+    <script src="./js/teacherForum.js"></script>
 </body>
 </html>

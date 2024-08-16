@@ -3,7 +3,7 @@ const { getStudentQuestionsCollection } = require('../models/studentQuestions');
 
 async function addQuestion(name, question) {
   const collection = await getStudentQuestionsCollection();
-  const result = await collection.insertOne({ name, question, date: new Date() });
+  const result = await collection.insertOne({ name, question, date: new Date(), answers: [] });
   return result;
 }
 
@@ -12,4 +12,13 @@ async function getAllQuestions() {
   return await collection.find({}).toArray();
 }
 
-module.exports = { addQuestion, getAllQuestions };
+async function addAnswer(questionId, answerData) {
+  const collection = await getStudentQuestionsCollection();
+  const result = await collection.updateOne(
+    { _id: questionId },
+    { $push: { answers: answerData } }
+  );
+  return result;
+}
+
+module.exports = { addQuestion, getAllQuestions, addAnswer };
