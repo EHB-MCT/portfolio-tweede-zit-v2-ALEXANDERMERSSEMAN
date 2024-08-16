@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Forum</title>
+    <title>Student forum</title>
+    <!-- Koppelen van de favicon -->
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Student Forum</h1>
-    <form id="questionForm">
-        <label for="question">Your Question:</label>
-        <textarea id="question" name="question" rows="4" required></textarea>
-        <br>
-        <button type="submit">Post Question</button>
-    </form>
-    <div id="message"></div>
-
-    <!-- Zorg ervoor dat het script geladen wordt na de HTML-elementen -->
+    <div class="forum-container">
+        <h1>Student Forum</h1>
+        <form id="questionForm">
+            <label for="question">Your Question</label>
+            <input type="text" id="question" name="question" required>
+            <br>
+            <label>
+                <input type="checkbox" id="anonymous"> Post anonymously
+            </label>
+            <br>
+            <button type="submit">Submit Question</button>
+        </form>
+        <div id="message"></div>
+    </div>
     <script src="./js/studentForum.js"></script>
 </body>
 </html>

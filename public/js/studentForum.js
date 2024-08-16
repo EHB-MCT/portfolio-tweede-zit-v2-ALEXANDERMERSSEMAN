@@ -1,18 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('questionForm');
     const messageDiv = document.getElementById('message');
+    const anonymousCheckbox = document.getElementById('anonymous');
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const questionInput = document.getElementById('question');
         const question = questionInput.value;
-        const name = localStorage.getItem('username');  // Haal naam op uit localStorage
+        const isAnonymous = anonymousCheckbox.checked;
 
-        if (!name || !question) {
-            messageDiv.innerText = 'Name and question are required.';
+        if (!question) {
+            messageDiv.innerText = 'Please enter a question.';
             return;
         }
+
+        // Get the username from local storage if not posting anonymously
+        const username = isAnonymous ? 'Anonymous' : localStorage.getItem('username');
 
         try {
             const response = await fetch('/api/student-questions', {
@@ -20,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, question }),
+                body: JSON.stringify({ name: username, question }),
             });
 
             if (!response.ok) {
