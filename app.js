@@ -1,6 +1,7 @@
 // app.js
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const path = require('path'); // Nodig voor het werken met bestandslocaties
 const app = express();
 const port = process.env.PORT || 2601;
 
@@ -9,6 +10,9 @@ const client = new MongoClient(uri);
 
 // Middleware om JSON-body te parseren
 app.use(express.json());
+
+// Middleware om de 'public' map als statische bestanden te gebruiken
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Connectie met MongoDB en ophalen van de database
 async function connectToDatabase() {

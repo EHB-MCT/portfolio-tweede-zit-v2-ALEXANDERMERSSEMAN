@@ -1,0 +1,85 @@
+/* Algemene opmaak */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;  /* Witte achtergrond */
+    display: flex;
+    justify-content: center;  /* Centreert het formulier horizontaal */
+    align-items: flex-start;  /* Zorgt ervoor dat het formulier hoger op de pagina staat */
+    height: 100vh;
+}
+
+/* Voeg wat extra ruimte aan de bovenkant toe */
+.login-container {
+    margin-top: 150px;  /* Zorgt ervoor dat het formulier meer naar boven staat */
+    background-color: #f7f7f7;  /* Lichtgrijze achtergrond voor het formulier */
+    padding: 40px;
+    border-radius: 15px;  /* Ronde hoeken */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);  /* Zachte schaduw */
+    width: 350px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333333;  /* Donkergrijze kleur voor de titel */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h2 {
+    color: #555555;  /* Grijs voor de ondertitel */
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Labels en invoervelden */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333333;  /* Donkergrijs voor de labels */
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;  /* Ronde hoeken voor invoervelden */
+    box-sizing: border-box;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #333333;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007BFF;  /* Blauwe rand bij focus */
+    outline: none;
+}
+
+/* Login knop */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 10px;  /* Ronde hoeken voor de knop */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;  /* Donkerder blauw bij hover */
+}
+
+/* Foutmelding styling */
+#message {
+    margin-top: 15px;  /* Meer ruimte tussen foutmelding en knop */
+    color: #e30613;  /* Rood voor foutmeldingen */
+    font-weight: bold;
+}
