@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student forum</title>
-    <!-- Koppelen van de favicon -->
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <title>Student Forum</title>
+    <link rel="stylesheet" href="./css/studentForum.css">
+    <link rel="icon" href="./images/favicon.ico" sizes="16x16" type="image/png">
 </head>
 <body>
     <div class="forum-container">
@@ -21,6 +21,10 @@
             <button type="submit">Submit Question</button>
         </form>
         <div id="message"></div>
+        <div id="questionsContainer"> <!-- Container for displaying questions -->
+            <h2>Questions:</h2>
+            <div id="questionsList"></div>
+        </div>
     </div>
     <script src="./js/studentForum.js"></script>
 </body>

@@ -25,6 +25,31 @@ async function connectToDatabase() {
   }
 }
 
+// GET request om gecombineerde gegevens op te halen
+app.get('/api/all-data', async (req, res) => {
+  try {
+    const database = await connectToDatabase();
+
+    // Verkrijg vragen van studenten
+    const questionsCollection = database.collection('student_questions');
+    const questions = await questionsCollection.find({}).toArray();
+
+    // Verkrijg gebruikersinformatie
+    const credentialsCollection = database.collection('credentials');
+    const credentials = await credentialsCollection.find({}).toArray();
+
+    // Combineer de gegevens
+    const data = {
+      questions: questions,
+      credentials: credentials
+    };
+
+    res.json(data);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // GET request om alle credentials op te halen
 app.get('/api/credentials', async (req, res) => {
   try {
@@ -83,20 +108,23 @@ app.post('/api/students', async (req, res) => {
 
 app.post('/api/student-questions', async (req, res) => {
   try {
-    const { name, question } = req.body;
-    if (!name || !question) {
-      return res.status(400).send('Name and question are required.');
-    }
+      const { name, question } = req.body;
+      if (!question) {
+          return res.status(400).send('Question is required.');
+      }
 
-    const database = await connectToDatabase();
-    const collection = database.collection('student_questions');
-    
-    // Voeg de vraag toe aan de database
-    const result = await collection.insertOne({ name, question, date: new Date() });
+      // Als de naam niet is opgegeven, stel deze in op 'Anonymous'
+      const actualName = name || 'Anonymous';
 
-    res.status(201).send('Question posted.');
+      const database = await connectToDatabase();
+      const collection = database.collection('student_questions');
+      
+      // Voeg de vraag toe aan de database
+      const result = await collection.insertOne({ name: actualName, question, date: new Date() });
+
+      res.status(201).send('Question posted.');
   } catch (err) {
-    res.status(500).send(err.message);
+      res.status(500).send(err.message);
   }
 });
 
