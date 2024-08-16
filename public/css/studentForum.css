@@ -1,4 +1,94 @@
-/* Voeg deze regels toe aan je studentForum.css */
+/* Algemene opmaak */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;  /* Lichtgrijze achtergrond */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+/* Forum container */
+.forum-container {
+    width: 80%;
+    max-width: 900px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel van het forum */
+h1 {
+    text-align: center;
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Formulierregels */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Ruimte tussen de elementen */
+    margin-bottom: 15px;
+}
+
+/* Input en knop styling */
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Berichtweergave */
+#message {
+    margin-top: 15px;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Vragen styling */
+#questionsContainer {
+    margin-top: 20px;
+}
+
+#questionsList {
+    margin: 0;
+    padding: 0;
+}
+
 .question-item {
     background-color: #f9f9f9;
     border: 1px solid #ddd;

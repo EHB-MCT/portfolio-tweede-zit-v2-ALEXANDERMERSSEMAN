@@ -1,145 +1,21 @@
-// app.js
 const express = require('express');
-const { MongoClient } = require('mongodb');
-const path = require('path'); // Nodig voor het werken met bestandslocaties
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 2601;
 
-const uri = 'mongodb://db:27017';  // 'db' is de naam van de MongoDB service in docker-compose
-const client = new MongoClient(uri);
+// Voeg de routers toe
+const studentQuestionsRoutes = require('./src/routes/studentQuestionsRoutes');
+const credentialsRoutes = require('./src/routes/credentialsRoutes');
+const allDataRoutes = require('./src/routes/allDataRoutes');  // Nieuwe all-data route
 
-// Middleware om JSON-body te parseren
 app.use(express.json());
-
-// Middleware om de 'public' map als statische bestanden te gebruiken
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connectie met MongoDB en ophalen van de database
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    return client.db('school'); // Verbeterde naam voor de database
-  } catch (err) {
-    console.error('Failed to connect to MongoDB:', err);
-    throw err;
-  }
-}
+// Voeg de nieuwe routes toe
+app.use('/api', studentQuestionsRoutes);
+app.use('/api', credentialsRoutes);
+app.use('/api', allDataRoutes);  // Gebruik de nieuwe all-data route
 
-// GET request om gecombineerde gegevens op te halen
-app.get('/api/all-data', async (req, res) => {
-  try {
-    const database = await connectToDatabase();
-
-    // Verkrijg vragen van studenten
-    const questionsCollection = database.collection('student_questions');
-    const questions = await questionsCollection.find({}).toArray();
-
-    // Verkrijg gebruikersinformatie
-    const credentialsCollection = database.collection('credentials');
-    const credentials = await credentialsCollection.find({}).toArray();
-
-    // Combineer de gegevens
-    const data = {
-      questions: questions,
-      credentials: credentials
-    };
-
-    res.json(data);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// GET request om alle credentials op te halen
-app.get('/api/credentials', async (req, res) => {
-  try {
-    const database = await connectToDatabase();
-    const collection = database.collection('credentials');
-    const credentials = await collection.find({}).toArray();
-    res.json(credentials);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// POST request om een leerkracht toe te voegen
-app.post('/api/teachers', async (req, res) => {
-  try {
-    const { name, password } = req.body;
-    if (!name || !password) {
-      return res.status(400).send('Name and password are required.');
-    }
-
-    const database = await connectToDatabase();
-    const collection = database.collection('credentials');
-    const result = await collection.updateOne(
-      { type: 'teachers' },
-      { $push: { teachers: { name, password } } },
-      { upsert: true }
-    );
-
-    res.status(201).send('Teacher added.');
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// POST request om een leerling toe te voegen
-app.post('/api/students', async (req, res) => {
-  try {
-    const { name, password } = req.body;
-    if (!name || !password) {
-      return res.status(400).send('Name and password are required.');
-    }
-
-    const database = await connectToDatabase();
-    const collection = database.collection('credentials');
-    const result = await collection.updateOne(
-      { type: 'students' },
-      { $push: { students: { name, password } } },
-      { upsert: true }
-    );
-
-    res.status(201).send('Student added.');
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-app.post('/api/student-questions', async (req, res) => {
-  try {
-      const { name, question } = req.body;
-      if (!question) {
-          return res.status(400).send('Question is required.');
-      }
-
-      // Als de naam niet is opgegeven, stel deze in op 'Anonymous'
-      const actualName = name || 'Anonymous';
-
-      const database = await connectToDatabase();
-      const collection = database.collection('student_questions');
-      
-      // Voeg de vraag toe aan de database
-      const result = await collection.insertOne({ name: actualName, question, date: new Date() });
-
-      res.status(201).send('Question posted.');
-  } catch (err) {
-      res.status(500).send(err.message);
-  }
-});
-
-app.get('/api/student-questions', async (req, res) => {
-  try {
-    const database = await connectToDatabase();
-    const collection = database.collection('student_questions');
-    const questions = await collection.find({}).toArray();
-    res.json(questions);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// Start de server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

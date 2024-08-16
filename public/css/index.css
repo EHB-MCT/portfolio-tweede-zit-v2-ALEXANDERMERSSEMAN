@@ -80,6 +80,6 @@ button:hover {
 /* Foutmelding styling */
 #message {
     margin-top: 15px;  /* Meer ruimte tussen foutmelding en knop */
-    color: #e30613;  /* Rood voor foutmeldingen */
+    color: #000000;  /* Rood voor foutmeldingen */
     font-weight: bold;
 }
