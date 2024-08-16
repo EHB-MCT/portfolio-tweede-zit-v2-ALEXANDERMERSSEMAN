@@ -6,7 +6,16 @@
     <title>Student Forum</title>
 </head>
 <body>
-    <h1>Welcome to the Student Forum</h1>
-    <p>Here you can ask questions.</p>
+    <h1>Student Forum</h1>
+    <form id="questionForm">
+        <label for="question">Your Question:</label>
+        <textarea id="question" name="question" rows="4" required></textarea>
+        <br>
+        <button type="submit">Post Question</button>
+    </form>
+    <div id="message"></div>
+
+    <!-- Zorg ervoor dat het script geladen wordt na de HTML-elementen -->
+    <script src="./js/studentForum.js"></script>
 </body>
 </html>

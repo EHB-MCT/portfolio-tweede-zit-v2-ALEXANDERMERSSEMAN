@@ -19,8 +19,12 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const student = credentials.find(user => user.type === 'students' && user.students.some(s => s.name === name && s.password === password));
 
         if (teacher) {
+            // Sla de naam op in localStorage en redirect
+            localStorage.setItem('username', name);
             window.location.href = 'teacherForum.html';  // Redirect naar leerkrachtenforum
         } else if (student) {
+            // Sla de naam op in localStorage en redirect
+            localStorage.setItem('username', name);
             window.location.href = 'studentForum.html';  // Redirect naar leerlingenforum
         } else {
             document.getElementById('message').innerText = 'Invalid login credentials';

@@ -81,6 +81,36 @@ app.post('/api/students', async (req, res) => {
   }
 });
 
+app.post('/api/student-questions', async (req, res) => {
+  try {
+    const { name, question } = req.body;
+    if (!name || !question) {
+      return res.status(400).send('Name and question are required.');
+    }
+
+    const database = await connectToDatabase();
+    const collection = database.collection('student_questions');
+    
+    // Voeg de vraag toe aan de database
+    const result = await collection.insertOne({ name, question, date: new Date() });
+
+    res.status(201).send('Question posted.');
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.get('/api/student-questions', async (req, res) => {
+  try {
+    const database = await connectToDatabase();
+    const collection = database.collection('student_questions');
+    const questions = await collection.find({}).toArray();
+    res.json(questions);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // Start de server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
