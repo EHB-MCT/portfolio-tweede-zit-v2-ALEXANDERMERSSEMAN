@@ -13,14 +13,20 @@ async function getAllQuestions() {
   return await collection.find({}).toArray();
 }
 
-// Voeg een antwoord toe aan een vraag
 async function addAnswer(questionId, answerData) {
   const collection = await getStudentQuestionsCollection();
   const result = await collection.updateOne(
-      { _id: new ObjectId(questionId) }, // Zorg ervoor dat ObjectId wordt gebruikt
+      { _id: new ObjectId(questionId) },
       { $push: { answers: answerData } }
   );
   return result;
 }
 
-module.exports = { addQuestion, getAllQuestions, addAnswer };
+// Nieuwe functie om een vraag te verwijderen
+async function deleteQuestionById(questionId) {
+  const collection = await getStudentQuestionsCollection();
+  const result = await collection.deleteOne({ _id: new ObjectId(questionId) });
+  return result;
+}
+
+module.exports = { addQuestion, getAllQuestions, addAnswer, deleteQuestionById };

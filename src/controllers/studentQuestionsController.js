@@ -1,5 +1,5 @@
 // controllers/studentQuestionsController.js
-const { addQuestion, getAllQuestions, addAnswer } = require('../services/studentQuestionsService');
+const { addQuestion, getAllQuestions, addAnswer, deleteQuestionById } = require('../services/studentQuestionsService');
 
 async function postQuestion(req, res) {
   try {
@@ -45,5 +45,20 @@ async function postAnswer(req, res) {
   }
 }
 
+// Nieuwe functie om een vraag te verwijderen
+async function deleteQuestion(req, res) {
+  try {
+    const questionId = req.params.id;
+    const result = await deleteQuestionById(questionId);
 
-module.exports = { postQuestion, getQuestions, postAnswer };
+    if (result.deletedCount === 1) {
+      res.status(200).send('Question deleted.');
+    } else {
+      res.status(404).send('Question not found.');
+    }
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
+
+module.exports = { postQuestion, getQuestions, postAnswer, deleteQuestion };

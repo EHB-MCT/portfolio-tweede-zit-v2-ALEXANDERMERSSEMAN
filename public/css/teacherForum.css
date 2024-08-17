@@ -65,6 +65,8 @@ h1 {
 
 /* Antwoorden styling */
 .question-item form.answerForm {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
 }
 
@@ -90,4 +92,27 @@ h1 {
 
 .question-item form.answerForm button:hover {
     background-color: #0056b3;
+}
+
+/* Actie knoppen styling */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.actions .deleteButton {
+    padding: 10px 15px;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.actions .deleteButton:hover {
+    background-color: #c82333;
 }

@@ -1,3 +1,4 @@
+// teacherForum.js
 document.addEventListener('DOMContentLoaded', () => {
     const questionsList = document.getElementById('questionsList');
     const messageDiv = document.createElement('div');
@@ -33,11 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         `).join('') : '<p>No answers yet.</p>'}
                     </div>
-                    <form class="answerForm">
-                        <input type="text" name="answer" placeholder="Your answer..." required>
-                        <button type="submit">Submit Answer</button>
-                        <input type="hidden" name="questionId" value="${question._id}">
-                    </form>
+                    <div class="actions">
+                        <form class="answerForm">
+                            <input type="text" name="answer" placeholder="Your answer..." required>
+                            <button type="submit">Submit Answer</button>
+                            <input type="hidden" name="questionId" value="${question._id}">
+                        </form>
+                        <button class="deleteButton" data-question-id="${question._id}">Delete Question</button>
+                    </div>
                     <hr>
                 `;
                 questionsList.appendChild(questionDiv);
@@ -66,6 +70,32 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Show success message and refresh questions
                         messageDiv.innerText = 'Answer posted successfully.';
                         fetchQuestions(); // Refresh the list of questions after submitting the answer
+                    } catch (error) {
+                        console.error('Error:', error);
+                        messageDiv.innerText = 'An error occurred. Please try again later.';
+                    }
+                });
+
+                // Add event listener for each delete button
+                const deleteButton = questionDiv.querySelector('.deleteButton');
+                deleteButton.addEventListener('click', async () => {
+                    const questionId = deleteButton.getAttribute('data-question-id');
+
+                    try {
+                        const response = await fetch(`/api/student-questions/${questionId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
+                        // Show success message and refresh questions
+                        messageDiv.innerText = 'Question deleted successfully.';
+                        fetchQuestions(); // Refresh the list of questions after deleting
                     } catch (error) {
                         console.error('Error:', error);
                         messageDiv.innerText = 'An error occurred. Please try again later.';
