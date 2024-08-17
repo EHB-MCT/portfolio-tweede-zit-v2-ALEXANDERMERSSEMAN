@@ -33,11 +33,17 @@ async function postAnswer(req, res) {
     }
 
     const actualName = name || 'Anonymous';
-    await addAnswer(questionId, { name: actualName, answer, date: new Date() });
-    res.status(201).send('Answer posted.');
+    const result = await addAnswer(questionId, { name: actualName, answer, date: new Date() });
+    
+    if (result.modifiedCount === 1) {
+      res.status(201).send('Answer posted.');
+    } else {
+      res.status(404).send('Question not found.');
+    }
   } catch (err) {
     res.status(500).send(err.message);
   }
 }
+
 
 module.exports = { postQuestion, getQuestions, postAnswer };

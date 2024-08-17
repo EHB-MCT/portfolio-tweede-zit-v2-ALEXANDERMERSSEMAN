@@ -62,3 +62,32 @@ h1 {
     border-top: 1px solid #ddd;
     margin: 10px 0;
 }
+
+/* Antwoorden styling */
+.question-item form.answerForm {
+    margin-top: 10px;
+}
+
+.question-item form.answerForm input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.question-item form.answerForm button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.question-item form.answerForm button:hover {
+    background-color: #0056b3;
+}

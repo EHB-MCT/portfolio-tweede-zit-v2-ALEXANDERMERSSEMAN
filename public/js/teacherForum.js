@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const questions = await response.json();
-            console.log('Fetched questions:', questions); // Debugging statement
             questionsList.innerHTML = ''; // Clear existing questions
 
             questions.forEach(question => {
@@ -34,9 +33,44 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         `).join('') : '<p>No answers yet.</p>'}
                     </div>
+                    <form class="answerForm">
+                        <input type="text" name="answer" placeholder="Your answer..." required>
+                        <button type="submit">Submit Answer</button>
+                        <input type="hidden" name="questionId" value="${question._id}">
+                    </form>
                     <hr>
                 `;
                 questionsList.appendChild(questionDiv);
+
+                // Add event listener for each answer form
+                const answerForm = questionDiv.querySelector('.answerForm');
+                answerForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    const formData = new FormData(answerForm);
+                    const answer = formData.get('answer');
+                    const questionId = formData.get('questionId');
+
+                    try {
+                        const response = await fetch('/api/student-questions/answer', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ questionId, answer, name: localStorage.getItem('username') || 'Anonymous' }),
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
+                        // Show success message and refresh questions
+                        messageDiv.innerText = 'Answer posted successfully.';
+                        fetchQuestions(); // Refresh the list of questions after submitting the answer
+                    } catch (error) {
+                        console.error('Error:', error);
+                        messageDiv.innerText = 'An error occurred. Please try again later.';
+                    }
+                });
             });
 
         } catch (error) {
