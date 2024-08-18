@@ -1,4 +1,3 @@
-// models/studentQuestions.js
 const { connectToDatabase } = require('./db');
 
 async function getStudentQuestionsCollection() {

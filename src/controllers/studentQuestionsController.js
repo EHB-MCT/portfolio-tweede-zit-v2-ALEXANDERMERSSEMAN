@@ -1,4 +1,3 @@
-// controllers/studentQuestionsController.js
 const { addQuestion, getAllQuestions, addAnswer, deleteQuestionById } = require('../services/studentQuestionsService');
 
 async function postQuestion(req, res) {
@@ -45,7 +44,6 @@ async function postAnswer(req, res) {
   }
 }
 
-// Nieuwe functie om een vraag te verwijderen
 async function deleteQuestion(req, res) {
   try {
     const questionId = req.params.id;

@@ -1,4 +1,3 @@
-// src/services/credentialsService.js
 const credentialsModel = require('../models/credentialsModel');
 
 async function getAllCredentials() {

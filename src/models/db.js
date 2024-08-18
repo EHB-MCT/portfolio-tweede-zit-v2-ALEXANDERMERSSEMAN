@@ -1,4 +1,3 @@
-// src/models/db.js
 const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb://db:27017';

@@ -1,4 +1,3 @@
-// src/controllers/credentialsController.js
 const credentialsService = require('../services/credentialsService');
 
 async function getAllCredentials(req, res) {

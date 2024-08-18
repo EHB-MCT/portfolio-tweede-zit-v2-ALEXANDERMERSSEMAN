@@ -1,4 +1,3 @@
-// src/models/credentialsModel.js
 const { connectToDatabase } = require('./db');
 
 async function getAllCredentials() {

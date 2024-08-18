@@ -1,24 +1,46 @@
 name: CI Pipeline
 
-on: [push, pull_request]
+# Voer de workflow uit op elke push of pull request naar de main branch
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
+      # Check out the code from the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
+      # Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18.x' # Pas de Node.js-versie aan indien nodig
 
+      # Cache node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+
+      # Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
+      # Run ESLint to check code quality
+      - name: Run ESLint
+        run: npm run lint
+
+      # Run tests
       - name: Run tests
         run: npm test
-
-      - name: Build Docker image
-        run: docker build -t forum-api .

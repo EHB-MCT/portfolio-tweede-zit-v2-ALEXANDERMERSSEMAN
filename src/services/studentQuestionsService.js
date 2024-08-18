@@ -1,4 +1,3 @@
-// services/studentQuestionsService.js
 const { ObjectId } = require('mongodb');
 const { getStudentQuestionsCollection } = require('../models/studentQuestions');
 
@@ -22,7 +21,6 @@ async function addAnswer(questionId, answerData) {
   return result;
 }
 
-// Nieuwe functie om een vraag te verwijderen
 async function deleteQuestionById(questionId) {
   const collection = await getStudentQuestionsCollection();
   const result = await collection.deleteOne({ _id: new ObjectId(questionId) });

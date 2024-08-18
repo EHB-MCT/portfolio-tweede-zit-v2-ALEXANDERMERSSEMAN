@@ -1,4 +1,3 @@
-// teacherForum.js
 document.addEventListener('DOMContentLoaded', () => {
     const questionsList = document.getElementById('questionsList');
     const messageDiv = document.createElement('div');
